@@ -1,0 +1,32 @@
+{
+  "name": "gw-fe",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "enzyme": "^2.4.1",
+    "flow-bin": "^0.33.0",
+    "react-addons-test-utils": "^15.3.2",
+    "react-scripts": "0.6.1",
+    "redux-devtools": "^3.3.1"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts start & npm run test",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
+  },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "node_modules/react/",
+      "node_modules/enzyme/"
+    ]
+  }
+}
