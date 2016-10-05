@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// docs: https://developers.google.com/maps/documentation/javascript/places-autocomplete
+// Autocomplete docs: https://developers.google.com/maps/documentation/javascript/places-autocomplete
 
 class CarSearchPlaceInput extends Component {
   componentDidMount() {
@@ -8,7 +8,8 @@ class CarSearchPlaceInput extends Component {
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
       console.log(place);
-    })
+      //TODO
+    });
   }
 
   render() {
