@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App/App';
+import CarSearch from './CarSearch/CarSearch';
 import './styles/index.css';
 
 ReactDOM.render(
-  <App />,
+  <CarSearch />,
   document.getElementById('root')
 );
