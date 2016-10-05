@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "gulp & react-scripts start",
-    "build": "react-scripts build",
+    "build": "gulp sass & react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "flow": "flow; test $? -eq 0 -o $? -eq 2"
