@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 
+// docs: https://developers.google.com/maps/documentation/javascript/places-autocomplete
+
 class CarSearchPlaceInput extends Component {
   componentDidMount() {
-    new window.google.maps.places.Autocomplete(this._input, this.props.options);
+    const autocomplete = new window.google.maps.places.Autocomplete(this._input, this.props.options);
+    autocomplete.addListener('place_changed', () => {
+      const place = autocomplete.getPlace();
+      console.log(place);
+    })
   }
 
   render() {
