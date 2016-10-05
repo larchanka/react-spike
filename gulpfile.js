@@ -1,17 +1,22 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var eslint = require('gulp-eslint');
 var sourcemaps = require('gulp-sourcemaps');
 
-var paths = [
+var scssPaths = [
   "./src/**/styles/*.{scss,sass}"
 ];
 
+var jsPaths = [
+  "./src/**/*.{js,jsx}"
+];
+
 gulp.task('serve', function() {
-  return gulp.watch(paths, ['sass']);
+  return gulp.watch(scssPaths.concat(jsPaths), ['sass', 'lint']);
 });
 
 gulp.task('sass', function() {
-  return gulp.src(paths, {base: "./src"})
+  return gulp.src(scssPaths, {base: "./src"})
     .pipe(sourcemaps.init())
     .pipe(sass({
       errLogToConsole: true
@@ -22,4 +27,11 @@ gulp.task('sass', function() {
     }));
 });
 
-gulp.task('default', ['sass', 'serve']);
+gulp.task('lint', () => {
+    return gulp.src(jsPaths.concat(['!node_modules/**', '!./src/**/*.test.{js,jsx}']))
+      .pipe(eslint())
+      .pipe(eslint.format())
+      .pipe(eslint.failAfterError());
+});
+
+gulp.task('default', ['sass', 'lint', 'serve']);
