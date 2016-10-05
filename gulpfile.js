@@ -1,37 +1,42 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var eslint = require('gulp-eslint');
-var sourcemaps = require('gulp-sourcemaps');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const eslint = require('gulp-eslint');
+const sourcemaps = require('gulp-sourcemaps');
 
-var scssPaths = [
+const scssPaths = [
   "./src/**/styles/*.{scss,sass}"
 ];
 
-var jsPaths = [
+const jsPaths = [
   "./src/**/*.{js,jsx}"
 ];
 
-gulp.task('serve', function() {
-  return gulp.watch(scssPaths.concat(jsPaths), ['sass', 'lint']);
-});
+const jsPathsExcluded = [
+  '!node_modules/**',
+  '!./src/**/*.test.{js,jsx}'
+];
 
-gulp.task('sass', function() {
-  return gulp.src(scssPaths, {base: "./src"})
+gulp.task('serve', () =>
+  gulp.watch(scssPaths.concat(jsPaths), [ 'sass', 'lint' ])
+);
+
+gulp.task('sass', () =>
+  gulp.src(scssPaths, { base: "./src" })
     .pipe(sourcemaps.init())
     .pipe(sass({
       errLogToConsole: true
     }).on('error', sass.logError))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest(function(file) {
-      return file.base;
-    }));
-});
+    .pipe(gulp.dest((file) =>
+      file.base
+    ))
+);
 
-gulp.task('lint', () => {
-    return gulp.src(jsPaths.concat(['!node_modules/**', '!./src/**/*.test.{js,jsx}']))
-      .pipe(eslint())
-      .pipe(eslint.format())
-      .pipe(eslint.failAfterError());
-});
+gulp.task('lint', () =>
+  gulp.src(jsPaths.concat(jsPathsExcluded))
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError())
+);
 
-gulp.task('default', ['sass', 'lint', 'serve']);
+gulp.task('default', [ 'sass', 'lint', 'serve' ]);

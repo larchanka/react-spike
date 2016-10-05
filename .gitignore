@@ -15,6 +15,3 @@ build
 npm-debug.log
 .idea/
 *.iml
-
-# css
-*.css
