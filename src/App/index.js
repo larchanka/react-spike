@@ -4,7 +4,7 @@ import './styles/App.css';
 
 class App extends Component {
   render() {
-    const name = process.env.NAME || 'Misha';
+    const name = 'Misha';
 
     return (
       <div className="App">
