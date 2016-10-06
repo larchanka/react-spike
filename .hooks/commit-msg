@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+echoerr () {
+  red=$(tput setaf 1)
+  reset=$(tput sgr0)
+  echo "${red}ERROR: $@ ${reset}" 1>&2
+}
+
+MESSAGE=$(<$1);
+
+if [[ "$MESSAGE" == "" ]]; then
+  echoerr "Empty commit message"
+  exit 1
+fi
+
+# check that we are inside feature and if so, compare the feature name with the
+# start of the message
+branchName=$(git symbolic-ref HEAD -q)
+if [[ $branchName == "" ]];then
+    # this is not any branch at all
+    exit 0;
+fi
+
+if [[ $branchName =~ (origin/)?master ]]; then
+  # commiting to the master or origin/master
+  echoerr "Can't commit to the master branch"
+  exit 1
+fi
+
+branchType=$(echo $branchName | awk -F'/' '{ print $3 }');
+if [[ $branchType != "feature" ]]; then
+  # not a feature branch
+  exit 0;
+fi
+
+featureName=$(echo $branchName | awk -F'/' '{ print $4 }');
+
+# compare the feature name with the prefix in the commit message
+
+echo $MESSAGE | grep -E "^\s*${featureName}" 
+exitCode=$?
+
+if [[ "$exitCode" != "0" ]]; then
+  echo "${featureName}: ${MESSAGE}" > $1
+fi
+
+
+
+exit 0;
