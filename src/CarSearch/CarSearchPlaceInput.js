@@ -29,4 +29,8 @@ CarSearchPlaceInput.propTypes = {
   options: PropTypes.object
 };
 
+CarSearchPlaceInput.contextTypes = {
+  carSearchStore: PropTypes.object.isRequired
+};
+
 export default CarSearchPlaceInput;

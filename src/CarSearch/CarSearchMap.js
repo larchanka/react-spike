@@ -25,4 +25,8 @@ CarSearchMap.propTypes = {
   options: PropTypes.object
 };
 
+CarSearchMap.contextTypes = {
+  carSearchStore: PropTypes.object.isRequired
+};
+
 export default CarSearchMap;
