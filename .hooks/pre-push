@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+export PATH=/usr/local/bin:$PATH
+
+# This hook will ensure a couple of things:
+# 1. It prevents pushing into the remote 'master'
+# 2. It checks for correct naming of the branch
+#    Branch can be one of the following forms: (feature | hotfix | chore)/branchName
+
+echoerr () {
+  red=$(tput setaf 1)
+  reset=$(tput sgr0)
+  echo "${red}ERROR: $@ ${reset}" 1>&2
+}
+
+localBranch=""
+remoteBranch=""
+
+IFS=' '
+while read localRef localSHA remoteRef remoteSHA
+do
+  # if this code will be executed then it will have form
+  #  refs/heads/${type}/${branch} fb6b82ea642bde424186131559ae5db29f0d5f88 refs/heads/master 166b94ff6aa53bc73fc0777f069d5aadd9e7730d
+  localBranch="${localRef}"
+  remoteBranch="${remoteRef}"
+done
+
+if [[ ${localBranch} == "" ]]; then
+  localBranch=$(git symbolic-ref HEAD -q)
+fi
+
+# Potential FIXME:
+# If remote branch isn't forced in the stdin, assume the default
+# tracked branch for current branch to be the push target.
+# If no tracked branch is specified, assume remote branch name is equal
+# to the local branch name.
+if [[ ${remoteBranch} == "" ]]; then
+  trackedBranch=$(git config --get branch.$(expr "${localBranch}" : "refs/heads/\(.*\)").merge)
+
+  if [[ ${trackedBranch} == "" ]]; then
+    remoteBranch=$(git symbolic-ref HEAD -q)
+  else
+    remoteBranch="${trackedBranch}"
+  fi
+fi
+
+if [[ ${remoteBranch} == refs/heads/master ]]; then
+  # commiting to the master or origin/master
+  echoerr "Can't push to the master branch (create PR instead)"
+  exit 1;
+fi
+
+branchType=$(echo ${remoteBranch} | awk -F'/' '{ print $3 }');
+
+if [[ ! ${branchType} =~ ^(feature|hotfix|chore)$ ]]; then
+  echoerr "Invalid branch prefix. Use [ feature , hotfix , chore ] instead (case-sensitive)."
+  exit 1;
+fi
+
+npmLint=$(npm run lint);
+lintExit=$?
+
+# show if there are errors
+echo ${npmLint}
+
+exit ${lintExit};
