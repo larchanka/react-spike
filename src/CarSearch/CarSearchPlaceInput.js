@@ -1,6 +1,7 @@
 /* global window */
 
 import React, { PropTypes, Component } from 'react';
+import { changePlace } from './actions';
 
 // Autocomplete docs: https://developers.google.com/maps/documentation/javascript/places-autocomplete
 
@@ -11,8 +12,7 @@ class CarSearchPlaceInput extends Component {
     );
     autocomplete.addListener('place_changed', () => {
       const place = autocomplete.getPlace();
-      console.log(place);
-      // TODO
+      this.context.carSearchStore.dispatch(changePlace(place));
     });
   }
 

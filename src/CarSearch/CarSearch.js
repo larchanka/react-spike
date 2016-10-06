@@ -1,14 +1,27 @@
 import React, { PropTypes, Component } from 'react';
-import { createStore } from 'redux';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import { createStore, applyMiddleware } from 'redux';
 import CarSearchPlaceInput from './CarSearchPlaceInput';
 import CarSearchMap from './CarSearchMap';
-import carSearchWidget from './reducers/carSearchWidget';
+import carSearchRootReducer from './reducers/index';
+
+
+const loggerMiddleware = createLogger();
+
 
 // The CarSearch widget does not depend on any global stores,
 // to make it easy to include into any application.
 // Instead, it has its own store,
 // which is passed down to its children through context.carSearchStore.
-const carSearchStore = createStore(carSearchWidget);
+const carSearchStore = createStore(
+  carSearchRootReducer,
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  )
+);
+
 
 class CarSearch extends Component {
 
