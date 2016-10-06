@@ -7,9 +7,32 @@ import './styles/CarSearchMap.css';
 
 class CarSearchMap extends Component {
   componentDidMount() {
-    const map = new window.google.maps.Map(this.mapDiv, this.props.options);
+    const defaultZoom = 8;
+
+    const map = new window.google.maps.Map(this.mapDiv, {
+      center: { lat: -34.397, lng: 150.644 },
+      zoom: defaultZoom
+    });
     console.log(map);
-    // TODO
+
+    const carSearchStore = this.context.carSearchStore;
+    let previousSelectedPlace = carSearchStore.getState().selectedPlace;
+    this.unsubscribe = carSearchStore.subscribe(() => {
+      const selectedPlace = carSearchStore.getState().selectedPlace;
+
+      // only update when selectedPlace of the store changes
+      if (selectedPlace === previousSelectedPlace) return;
+      previousSelectedPlace = selectedPlace;
+
+      if (selectedPlace && selectedPlace.geometry) {
+        map.panTo(selectedPlace.geometry.location);
+        map.setZoom(defaultZoom);
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
   }
 
   render() {
@@ -20,10 +43,6 @@ class CarSearchMap extends Component {
     );
   }
 }
-
-CarSearchMap.propTypes = {
-  options: PropTypes.object
-};
 
 CarSearchMap.contextTypes = {
   carSearchStore: PropTypes.object.isRequired

@@ -22,6 +22,8 @@ const carSearchStore = createStore(
   )
 );
 
+console.log(carSearchStore);
+
 
 class CarSearch extends Component {
 
@@ -41,12 +43,7 @@ class CarSearch extends Component {
             componentRestrictions: { country: 'nl' }
           }}
         />
-        <CarSearchMap
-          options={{
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 8
-          }}
-        />
+        <CarSearchMap />
       </div>
     );
   }
