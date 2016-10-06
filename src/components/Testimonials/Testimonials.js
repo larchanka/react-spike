@@ -3,39 +3,36 @@ import React, { PropTypes, Component } from 'react';
 import './styles/index.css';
 
 class Testimonials extends Component {
+
   componentDidMount() {
 
   }
 
   renderTestimonial() {
-    const testimonials = this.options.data;
+    const testimonials = this.props.data;
 
-    return testimonials.map(testimonial => {
-      const { imageUrl, text, name } = testimonial;
-
-      return (
-        <div className='Testimonial'>
-          <div className='Testimonial-Image'>
-            <img src={imageUrl} alt={name} />
-          </div>
-          <div className='Testimonial-Content'>
-            <div className='Testimonial-Text'>{text}</div>
-            <div className='Testimonial-Name'>{name}</div>
-          </div>
+    return testimonials.map(({ imageUrl, text, name }) =>
+      <li className="Testimonial">
+        <div className="Testimonial-Image">
+          <img src={imageUrl} alt={name} />
         </div>
-      );
-    });
+        <div className="Testimonial-Content">
+          <div className="Testimonial-Text">{text}</div>
+          <div className="Testimonial-Name">{name}</div>
+        </div>
+      </li>
+    );
   }
 
   render() {
-    if (!(this.options.data || []).length) {
+    if (!(this.props.data || []).length) {
       return null;
     }
 
     return (
-      <div className='Testimonials'>
-        {::this.renderTestimonial()}
-      </div>
+      <ul className="Testimonials">
+        {this.renderTestimonial()}
+      </ul>
     );
   }
 }
