@@ -11,6 +11,7 @@
     "eslint-plugin-react": "^6.3.0",
     "flow-bin": "^0.33.0",
     "gulp": "^3.9.1",
+    "gulp-eslint": "^3.0.1",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "react-addons-test-utils": "^15.3.2",
@@ -28,6 +29,7 @@
   },
   "scripts": {
     "start": "gulp & react-scripts start",
+    "gulp": "gulp",
     "build": "gulp sass & react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
