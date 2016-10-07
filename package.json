@@ -3,7 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.16.0",
+    "babel-jest": "^16.0.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "chai": "^3.5.0",
+    "chai-immutable": "^1.6.0",
     "enzyme": "^2.4.1",
+    "es6-promise": "^4.0.5",
     "eslint": "^3.7.1",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-plugin-import": "^2.0.0",
@@ -14,11 +23,19 @@
     "gulp-eslint": "^3.0.1",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
+    "isparta": "^4.0.0",
+    "istanbul": "^0.4.5",
+    "jest": "^16.0.1",
+    "jsdom": "^9.6.0",
+    "mocha": "^3.1.0",
+    "mocha-spec-cov-alt": "^1.1.1",
     "react-addons-test-utils": "^15.3.2",
     "react-scripts": "0.6.1",
     "redux-devtools": "^3.3.1"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
+    "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
@@ -30,17 +47,9 @@
     "redux-thunk": "^2.1.0"
   },
   "scripts": {
-    "start": "gulp & react-scripts start",
+    "start": "clear && gulp & npm run test & react-scripts start",
     "gulp": "gulp",
     "build": "gulp sass & react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "flow": "flow; test $? -eq 0 -o $? -eq 2"
-  },
-  "jest": {
-    "unmockedModulePathPatterns": [
-      "node_modules/react/",
-      "node_modules/enzyme/"
-    ]
+    "test": "find ./src -name '*.test.js' | xargs mocha -R mocha-spec-cov-alt -b -w --compilers js:babel-core/register --require ./helpers/test.helper.js"
   }
 }

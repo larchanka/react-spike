@@ -1,8 +1,9 @@
 import React from 'react';
 
 import Testimonials from '../components/Testimonials/Testimonials';
+import CarSearch from '../CarSearch/CarSearch';
 
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './styles/App.css';
 
 const testimonialsData = [
@@ -25,10 +26,15 @@ const testimonialsData = [
 
 const App = () => (
   <div className="App">
-    <div className="App-header">
+    {/* }<div className="App-header">
       <img src={logo} className="App-logo" alt="logo" />
       <h2>Welcome to React!</h2>
-    </div>
+    </div> */}
+    <h1>Car search</h1>
+    <CarSearch />
+
+    <hr />
+    <h1>Testimonials</h1>
     <Testimonials data={testimonialsData} />
   </div>
 );

@@ -1,8 +1,55 @@
 .Testimonials {
   display: block;
+  position: relative;
   list-style: none;
   padding: 0;
   margin: 0 auto;
   width: 100%;
   max-width: 1310px;
+  height: 375px;
+  overflow: hidden;
+}
+
+.Testimonial {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 66.66666667%;
+  height: 375px;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+
+  &-Active {
+    transition: opacity .8s;
+    opacity: 1;
+  }
+}
+
+.Testimonial-Image {
+  margin-right: 25px;
+}
+
+.Testimonial-Text {
+  margin: 0 0 20px;
+  font-weight: 700;
+  text-align: left;
+  line-height: 1.5em;
+
+  &:before {
+    content: '\2018';
+  }
+
+  &:after {
+    content: '\2019';
+  }
+}
+
+.Testimonial-Name {
+  text-align: left;
+  color: #c9c9c9;
 }
