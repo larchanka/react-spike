@@ -22,11 +22,12 @@ gulp.task('serve', () =>
 
 gulp.task('sass', () =>
   gulp.src(scssPaths, { base: "./src" })
-    .pipe(sourcemaps.init())
+    // .pipe(sourcemaps.init())
     .pipe(sass({
-      errLogToConsole: true
+      errLogToConsole: true,
+      outputStyle: 'compressed'
     }).on('error', sass.logError))
-    .pipe(sourcemaps.write())
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest((file) =>
       file.base
     ))
@@ -36,7 +37,6 @@ gulp.task('lint', () =>
   gulp.src(jsPaths.concat(jsPathsExcluded))
     .pipe(eslint())
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError())
 );
 
 gulp.task('default', [ 'sass', 'lint', 'serve' ]);

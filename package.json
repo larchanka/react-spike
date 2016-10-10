@@ -49,6 +49,7 @@
   "scripts": {
     "start": "clear && gulp & npm run test & react-scripts start",
     "gulp": "gulp",
+    "lint": "gulp lint",
     "build": "gulp sass & react-scripts build",
     "test": "find ./src -name '*.test.js' | xargs mocha -R mocha-spec-cov-alt -b -w --compilers js:babel-core/register --require ./helpers/test.helper.js"
   }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Testimonials from '../components/Testimonials/Testimonials';
+import PreFooterLinks from '../components/PreFooterLinks/PreFooterLinks';
 import CarSearch from '../CarSearch/CarSearch';
 
 // import logo from './logo.svg';
@@ -36,6 +37,10 @@ const App = () => (
     <hr />
     <h1>Testimonials</h1>
     <Testimonials data={testimonialsData} />
+
+    <hr />
+    <h1>Pre Footer Links</h1>
+    <PreFooterLinks data={testimonialsData} />
   </div>
 );
 

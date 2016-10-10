@@ -1,0 +1,97 @@
+@import '../../../globals/constants.scss';
+
+.PreFooterLinks {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: $green;
+}
+
+.PreFooterLink {
+  display: block;
+  flex: 1;
+  text-align: left;
+  box-sizing: border-box;
+  height: 220px;
+  border-right: 1px solid $green-dark;
+
+  &:last-child {
+    border-right: 0;
+  }
+}
+
+.PreFooterLink-Link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: #fff;
+
+  &:hover {
+    background-color: $green-dark;
+  };
+}
+
+.PreFooterLink-Wrapper {
+  width: 83.33333333%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  max-width: 585px;
+  font-size: 100%;
+  margin-right: 0;
+  display: flex;
+  align-items: center;
+
+  .PreFooterLink:first-child & {
+    float: right;
+  }
+}
+
+.PreFooterLink-ContentWrapper {
+  display: flex;
+}
+
+.PreFooterLink-Content {
+  max-width: 440px;
+  margin-bottom: 10px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: middle;
+  display: inline-block;
+  box-sizing: border-box;
+  margin-left: 40px;
+}
+
+.PreFooterLink-SubTitle {
+  display: block;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 85.71428571%;
+}
+
+.PreFooterLink-Title {
+  line-height: 40px;
+  margin: 0 20px 0 0;
+  font-size: 250%;
+}
+
+.PreFooterLink-Icon {
+  display: inline-block;
+  vertical-align: middle;
+  background-color: #ffffff;
+  height: 90px;
+  width: 90px;
+  min-width: 90px;
+  line-height: 100px;
+  font-size: 30px;
+  border-radius: 50%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.PreFooterLink-Icon-Image {
+  height: 34%;
+}
