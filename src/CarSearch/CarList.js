@@ -17,7 +17,7 @@ const CarList = ({ data, mapBounds }, { carSearchStore }) => {
   const locations = [];
   for (const city of data.citiesAndLocations) {
     for (const location of city.locations) {
-      if (mapBounds.contains({ lat: location.geo[0], lng: location.geo[1] })) {
+      if (mapBounds && mapBounds.contains({ lat: location.geo[0], lng: location.geo[1] })) {
         locations.push(location);
       }
     }

@@ -59,7 +59,7 @@ class CarSearchMap extends Component {
       for (const location of city.locations) {
         const marker = MapMarkers.createMarker(location, this.map);
         marker.addListener('click', () => {
-          this.context.carSearchStore.dispatch(changeSelectedLocation(location))
+          this.context.carSearchStore.dispatch(changeSelectedLocation(location));
         });
         markers.push(marker);
       }
