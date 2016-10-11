@@ -19,8 +19,7 @@ const tmpData = [
 class PreFooterLinks extends Component {
 
   renderLink() {
-    const linksData = tmpData;
-    return tmpData.map(({url, title, subTitle}, index) => (
+    return (this.props.data || tmpData).map(({ url, title, subTitle }, index) => (
       <li key={`prefooterlink-${index}`} className="PreFooterLink">
         <a href={url} title={subTitle} className="PreFooterLink-Link">
           <div className="PreFooterLink-Wrapper">
@@ -40,7 +39,6 @@ class PreFooterLinks extends Component {
   }
 
   render() {
-
     return (
       <ul className="PreFooterLinks">
         {this.renderLink()}

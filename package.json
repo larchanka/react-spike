@@ -31,7 +31,11 @@
     "mocha-spec-cov-alt": "^1.1.1",
     "react-addons-test-utils": "^15.3.2",
     "react-scripts": "0.6.1",
-    "redux-devtools": "^3.3.1"
+    "redux-devtools": "^3.3.1",
+    "wdio-mocha-framework": "^0.4.3",
+    "wdio-selenium-standalone-service": "0.0.7",
+    "wdio-spec-reporter": "0.0.3",
+    "webdriverio": "^4.2.16"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -57,7 +61,8 @@
     "gulp": "gulp",
     "lint": "gulp lint",
     "build": "gulp sass & react-scripts build",
-    "test": "find ./src -name '*.test.js' | xargs mocha -R mocha-spec-cov-alt -b -w --compilers js:babel-core/register --require ./helpers/test.helper.js"
+    "test": "find ./src -name '*.test.js' | xargs mocha -R mocha-spec-cov-alt -b -w --compilers js:babel-core/register --require ./helpers/test.helper.js",
+    "selenium": "wdio ./selenium-tests/wdio.conf.js"
   },
   "proxy": "https://www.greenwheels.com"
 }
