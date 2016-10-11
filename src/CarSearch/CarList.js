@@ -28,6 +28,7 @@ const CarList = ({ data, mapBounds }, { carSearchStore }) => {
     const location = locations[index];
 
     return (
+      // eslint-disable-next-line
       <div
         className="CarListItemContainer"
         key={key}

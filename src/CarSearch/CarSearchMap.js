@@ -4,7 +4,7 @@ import MarkerClusterer from 'marker-clusterer-plus';
 import _ from 'lodash';
 import React, { PropTypes, Component } from 'react';
 import { connect } from '../util/react-redux-custom-store-key';
-import { changeMapBounds } from './actions';
+import { changeMapBounds, changeSelectedLocation } from './actions';
 import * as MapMarkers from './MapMarkers';
 import './styles/CarSearchMap.css';
 
@@ -57,7 +57,11 @@ class CarSearchMap extends Component {
 
     for (const city of citiesAndLocations) {
       for (const location of city.locations) {
-        markers.push(MapMarkers.createMarker(location, this.map));
+        const marker = MapMarkers.createMarker(location, this.map);
+        marker.addListener('click', () => {
+          this.context.carSearchStore.dispatch(changeSelectedLocation(location))
+        });
+        markers.push(marker);
       }
     }
 
