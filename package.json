@@ -37,10 +37,16 @@
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.16.4",
+    "marker-clusterer-plus": "^2.1.4",
+    "markerwithlabel": "^2.0.0",
     "react": "^15.3.2",
+    "react-addons-shallow-compare": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "react-spinner": "^0.2.6",
+    "react-virtualized": "^8.0.12",
     "redux": "^3.6.0",
     "redux-logger": "^2.7.0",
     "redux-router": "^2.1.2",
@@ -52,5 +58,6 @@
     "lint": "gulp lint",
     "build": "gulp sass & react-scripts build",
     "test": "find ./src -name '*.test.js' | xargs mocha -R mocha-spec-cov-alt -b -w --compilers js:babel-core/register --require ./helpers/test.helper.js"
-  }
+  },
+  "proxy": "https://www.greenwheels.com"
 }

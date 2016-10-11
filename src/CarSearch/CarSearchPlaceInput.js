@@ -1,4 +1,4 @@
-/* global window */
+/* global google */
 
 import React, { PropTypes, Component } from 'react';
 import { changePlace } from './actions';
@@ -7,7 +7,7 @@ import { changePlace } from './actions';
 
 class CarSearchPlaceInput extends Component {
   componentDidMount() {
-    const autocomplete = new window.google.maps.places.Autocomplete(
+    const autocomplete = new google.maps.places.Autocomplete(
       this.inputRef, this.props.options
     );
     autocomplete.addListener('place_changed', () => {

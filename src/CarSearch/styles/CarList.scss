@@ -1,0 +1,14 @@
+.CarList {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5px;
+
+  .CarListItemContainer {
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+
+    .CarListItem {
+      padding: 5px;
+    }
+  }
+}

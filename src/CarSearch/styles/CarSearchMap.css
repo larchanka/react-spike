@@ -1,1 +1,1 @@
-.CarSearchMap .mapDiv{width:500px;height:400px}
+.CarSearchMap{display:inline-block}.CarSearchMap .mapDiv{width:600px;height:400px}.CarSearchMap .mapDiv .markerLabel{background:url(/book/static/images/googlemaps-sprite.png) no-repeat}.CarSearchMap .mapDiv .markerLabel.railway{width:13px;height:13px;background-position:-483px 0}

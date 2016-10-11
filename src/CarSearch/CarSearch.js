@@ -2,16 +2,15 @@ import React, { PropTypes, Component } from 'react';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
-import CarSearchPlaceInput from './CarSearchPlaceInput';
-import CarSearchMap from './CarSearchMap';
 import carSearchRootReducer from './reducers/index';
-
+import { fetchData } from './actions/FetchActions';
+import CarSearchLayout from './CarSearchLayout';
+import './styles/CarSearch.css';
 
 const loggerMiddleware = createLogger();
 
-
-// The CarSearch widget does not depend on any global stores,
-// to make it easy to include into any application.
+// To make it easy to include into any application,
+// the CarSearch widget does not depend on any global stores.
 // Instead, it has its own store,
 // which is passed down to its children through context.carSearchStore.
 const carSearchStore = createStore(
@@ -22,28 +21,19 @@ const carSearchStore = createStore(
   )
 );
 
-console.log(carSearchStore);
-
+carSearchStore.dispatch(fetchData());
 
 class CarSearch extends Component {
 
-  // eslint-disable-next-line
   getChildContext() {
-    // Can't use react-redux Provider, because the "store" key might already be used.
-    // We want a context key that's only used for this widget.
+    // Can't use react-redux Provider, because it doesn't support a custom store key
     return { carSearchStore };
   }
 
   render() {
     return (
       <div className="CarSearch">
-        <CarSearchPlaceInput
-          options={{
-            types: ['geocode'],
-            componentRestrictions: { country: 'nl' }
-          }}
-        />
-        <CarSearchMap />
+        <CarSearchLayout />
       </div>
     );
   }
