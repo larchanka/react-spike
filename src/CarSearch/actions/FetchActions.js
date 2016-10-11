@@ -40,9 +40,7 @@ export function fetchData() {
     return Promise.all(
       endpointKeys.map(key => fetch(endpointUrls[key], requestInit))
     )
-      .then((responses) => {
-        return Promise.all(responses.map(response => response.json()));
-      })
+      .then(responses => Promise.all(responses.map(response => response.json())))
       .then((endpointDataArray) => {
         const data = {};
         let i = 0;

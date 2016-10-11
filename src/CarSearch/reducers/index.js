@@ -2,6 +2,9 @@ import { combineReducers } from 'redux';
 import * as Actions from '../actions';
 import * as FetchActions from '../actions/FetchActions';
 
+/**
+ * The selected google.maps.places.PlaceResult that has been entered into the place input.
+ */
 function selectedPlace(state = null, action) {
   switch (action.type) {
     case Actions.CHANGE_PLACE:
@@ -42,10 +45,23 @@ function mapBounds(state = null, action) {
   }
 }
 
+/**
+ * The selected location from citiesAndLocations.
+ */
+function selectedLocation(state = null, action) {
+  switch (action.type) {
+    case Actions.CHANGE_SELECTED_LOCATION:
+      return action.location;
+    default:
+      return state;
+  }
+}
+
 const rootReducer = combineReducers({
   selectedPlace,
   serverData,
-  mapBounds
+  mapBounds,
+  selectedLocation
 });
 
 export default rootReducer;

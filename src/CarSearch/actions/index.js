@@ -14,10 +14,11 @@ export function changeMapBounds(mapBounds) {
   };
 }
 
-export const CHANGE_SELECTED_CAR = 'CHANGE_SELECTED_CAR';
-export function changeMapBounds(mapBounds) {
+export const CHANGE_SELECTED_LOCATION = 'CHANGE_SELECTED_LOCATION';
+export function changeSelectedLocation(location) {
   return {
-    type: CHANGE_SELECTED_CAR,
-    mapBounds
+    type: CHANGE_SELECTED_LOCATION,
+    location
   };
 }
+
