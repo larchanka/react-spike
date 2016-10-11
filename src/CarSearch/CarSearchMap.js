@@ -1,6 +1,7 @@
 /* global google */
 
 import MarkerClusterer from 'marker-clusterer-plus';
+import InfoBox from 'google-maps-infobox';
 import _ from 'lodash';
 import React, { PropTypes, Component } from 'react';
 import { connect } from '../util/react-redux-custom-store-key';
@@ -12,21 +13,22 @@ import './styles/CarSearchMap.css';
 
 const searchZoom = 12;
 
-function getLocation(place) {
+function getLatLng(place) {
   if (!place || !place.geometry) return null;
   return place.geometry.location;
 }
 
-const mapStateToProps = ({ selectedPlace, serverData }) => ({
-  location: getLocation(selectedPlace),
-  data: serverData.data
+const mapStateToProps = ({ selectedPlace, serverData, selectedLocation }) => ({
+  initialLatLng: getLatLng(selectedPlace),
+  data: serverData.data,
+  selectedLocation
 });
 
 class CarSearchMap extends Component {
   componentDidMount() {
     this.map = new google.maps.Map(this.mapDiv, {
-      center: this.props.location || { lat: 52.132633, lng: 5.291266 },
-      zoom: (this.props.location ? searchZoom : 8)
+      center: this.props.initialLatLng || { lat: 52.132633, lng: 5.291266 },
+      zoom: (this.props.initialLatLng ? searchZoom : 8)
     });
 
     this.map.addListener('bounds_changed', _.throttle(() => {
@@ -35,18 +37,26 @@ class CarSearchMap extends Component {
 
     if (this.props.data) {
       this.drawMarkers(this.props.data);
+
+      if (this.props.selectedLocation) {
+        this.drawInfoWindow(this.props.selectedLocation);
+      }
     }
   }
 
   componentWillReceiveProps(nextProps) {
     // the equality check is just to prevent other props from triggering panning
-    if (nextProps.location !== this.props.location) {
-      this.map.panTo(nextProps.location);
+    if (nextProps.initialLatLng !== this.props.initialLatLng) {
+      this.map.panTo(nextProps.initialLatLng);
       this.map.setZoom(searchZoom);
     }
 
     if (nextProps.data !== this.props.data) {
       this.drawMarkers(nextProps.data);
+    }
+
+    if (nextProps.selectedLocation !== this.props.selectedLocation) {
+      this.drawInfoWindow(nextProps.selectedLocation);
     }
   }
 
@@ -62,6 +72,7 @@ class CarSearchMap extends Component {
           this.context.carSearchStore.dispatch(changeSelectedLocation(location));
         });
         markers.push(marker);
+        location.marker = marker;
       }
     }
 
@@ -83,6 +94,17 @@ class CarSearchMap extends Component {
     });
   }
 
+  drawInfoWindow(location) {
+    if (this.infoBox) {
+      this.infoBox.close();
+    }
+
+    this.infoBox = new InfoBox({
+      content: location.addr
+    });
+    this.infoBox.open(this.map, location.marker);
+  }
+
   render() {
     return (
       <div className="CarSearchMap">
@@ -93,8 +115,9 @@ class CarSearchMap extends Component {
 }
 
 CarSearchMap.propTypes = {
-  location: PropTypes.object,
+  initialLatLng: PropTypes.object,
   data: PropTypes.object,
+  selectedLocation: PropTypes.object
 };
 
 CarSearchMap.contextTypes = {

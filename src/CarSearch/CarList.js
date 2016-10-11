@@ -1,15 +1,17 @@
 import React, { PropTypes } from 'react';
 import { List } from 'react-virtualized';
+import classnames from 'classnames';
 import { connect } from '../util/react-redux-custom-store-key';
 import { changeSelectedLocation } from './actions';
 import './styles/CarList.css';
 
-const mapStateToProps = ({ serverData, mapBounds }) => ({
+const mapStateToProps = ({ serverData, mapBounds, selectedLocation }) => ({
   data: serverData.data,
-  mapBounds
+  mapBounds,
+  selectedLocation
 });
 
-const CarList = ({ data, mapBounds }, { carSearchStore }) => {
+const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -35,7 +37,7 @@ const CarList = ({ data, mapBounds }, { carSearchStore }) => {
         style={style}
         onClick={() => carSearchStore.dispatch(changeSelectedLocation(location))}
       >
-        <div className="CarListItem">
+        <div className={classnames(['CarListItem', location === selectedLocation && 'selected'])}>
           {location.addr}
         </div>
       </div>
@@ -57,7 +59,8 @@ const CarList = ({ data, mapBounds }, { carSearchStore }) => {
 
 CarList.propTypes = {
   data: PropTypes.object,
-  mapBounds: PropTypes.object
+  mapBounds: PropTypes.object,
+  selectedLocation: PropTypes.object
 };
 
 CarList.contextTypes = {
