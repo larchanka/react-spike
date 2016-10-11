@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { List } from 'react-virtualized';
 import { connect } from '../util/react-redux-custom-store-key';
+import { changeSelectedLocation } from './actions';
 import './styles/CarList.css';
 
 const mapStateToProps = ({ serverData, mapBounds }) => ({
@@ -8,9 +9,9 @@ const mapStateToProps = ({ serverData, mapBounds }) => ({
   mapBounds
 });
 
-const CarList = ({ data, mapBounds }) => {
+const CarList = ({ data, mapBounds }, { carSearchStore }) => {
   if (!data) {
-    return <div>Loading</div>;
+    return <div>Loading...</div>;
   }
 
   const locations = [];
@@ -23,17 +24,22 @@ const CarList = ({ data, mapBounds }) => {
   }
 
   // eslint-disable-next-line
-  const rowRenderer = ({ key, index, style }) => (
-    <div
-      className="CarListItemContainer"
-      key={key}
-      style={style}
-    >
-      <div className="CarListItem">
-        {locations[index].addr}
+  const rowRenderer = ({ key, index, style }) => {
+    const location = locations[index];
+
+    return (
+      <div
+        className="CarListItemContainer"
+        key={key}
+        style={style}
+        onClick={() => carSearchStore.dispatch(changeSelectedLocation(location))}
+      >
+        <div className="CarListItem">
+          {location.addr}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="CarList">
