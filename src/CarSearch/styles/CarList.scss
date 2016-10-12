@@ -3,12 +3,9 @@
   vertical-align: top;
   margin-left: 5px;
 
-  .CarListItemContainer {
+  .CarListItem {
     border-bottom: 1px solid #ccc;
     cursor: pointer;
-
-    .CarListItem {
-      padding: 5px;
-    }
+    padding: 5px;
   }
 }

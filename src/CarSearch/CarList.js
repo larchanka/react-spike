@@ -32,14 +32,12 @@ const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
     return (
       // eslint-disable-next-line
       <div
-        className="CarListItemContainer"
+        className={classnames(['CarListItem', location === selectedLocation && 'selected'])}
         key={key}
         style={style}
         onClick={() => carSearchStore.dispatch(changeSelectedLocation(location))}
       >
-        <div className={classnames(['CarListItem', location === selectedLocation && 'selected'])}>
-          {location.addr}
-        </div>
+        {location.addr}
       </div>
     );
   };
