@@ -8,8 +8,13 @@ export function createInfoBox(location) {
     '<div class="iw-top"></div>' +
     '<div class="iw-mdl">';
 
-  content += `<p class="addr">${location.addr}</p>`;
-  // TODO
+  if (location.cars.length <= 1) {
+    const car = location.cars[0];
+    content += `<p class="car">${car.model} <span class="type ${car.type}"></span>`
+      + `<p class="addr">${location.addr}</p>`;
+  } else {
+    content += `${location.cars.length} cars`;
+  }
 
   content += '</div>' +
     '<div class="iw-btm"></div>';
