@@ -3,7 +3,7 @@ import Spinner from 'react-spinner';
 import { connect } from '../util/react-redux-custom-store-key';
 import './styles/CarSearchLayout.css';
 import '../../node_modules/react-spinner/react-spinner.css';
-import CarSearchPlaceInput from './CarSearchPlaceInput';
+import CarSearchTopBar from './CarSearchTopBar';
 import CarSearchMap from './CarSearchMap';
 import CarList from './CarList';
 
@@ -20,12 +20,7 @@ class CarSearchLayout extends Component {
   render() {
     return (
       <div className="CarSearchLayout">
-        <CarSearchPlaceInput
-          options={{
-            types: ['geocode'],
-            componentRestrictions: { country: 'nl' }
-          }}
-        />
+        <CarSearchTopBar />
         <CarSearchMap />
         <CarList />
         {this.renderLoading()}
