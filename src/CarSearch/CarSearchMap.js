@@ -70,6 +70,11 @@ class CarSearchMap extends Component {
         const marker = MapMarkers.createMarker(location, this.map);
         marker.addListener('click', () => {
           this.context.carSearchStore.dispatch(changeSelectedLocation(location));
+
+          if (this.map.getZoom() < searchZoom) {
+            this.map.panTo(marker.getPosition());
+            this.map.setZoom(searchZoom);
+          }
         });
         markers.push(marker);
         location.marker = marker;
