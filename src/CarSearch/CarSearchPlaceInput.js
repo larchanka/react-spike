@@ -2,6 +2,7 @@
 
 import React, { PropTypes, Component } from 'react';
 import { changePlace } from './actions';
+import './styles/CarSearchPlaceInput.css';
 
 // Autocomplete docs: https://developers.google.com/maps/documentation/javascript/places-autocomplete
 
