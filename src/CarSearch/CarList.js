@@ -17,9 +17,13 @@ const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
   }
 
   const locations = [];
+  let selectedLocationIndex;
   for (const city of data.citiesAndLocations) {
     for (const location of city.locations) {
       if (mapBounds && mapBounds.contains({ lat: location.geo[0], lng: location.geo[1] })) {
+        if (location === selectedLocation) {
+          selectedLocationIndex = locations.length;
+        }
         locations.push(location);
       }
     }
@@ -50,6 +54,7 @@ const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
         rowCount={locations.length}
         rowHeight={100}
         rowRenderer={rowRenderer}
+        scrollToIndex={selectedLocationIndex}
       />
     </div>
   );
