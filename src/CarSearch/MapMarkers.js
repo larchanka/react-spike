@@ -1,6 +1,8 @@
 /* global google */
 
 import markerWithLabelModule from 'markerwithlabel';
+import MarkerClusterer from 'marker-clusterer-plus';
+import './styles/MapMarkers.css';
 
 const MarkerWithLabel = markerWithLabelModule(google.maps);
 
@@ -39,5 +41,24 @@ export function createMarker(location, map) {
       anchor: new google.maps.Point(16, 38)
     },
     ...labelOptions
+  });
+}
+
+export function createMarkerClusterer(markers, map) {
+  // eslint-disable-next-line
+  return new MarkerClusterer(map, markers, {
+    gridSize: 35,
+    minimumClusterSize: 4,
+    styles: [
+      {
+        url: spriteUrl,
+        height: 28,
+        width: 28,
+        anchorText: [1, 0],
+        textColor: '#fff',
+        textSize: 10,
+        backgroundPosition: '-360px -85px'
+      }
+    ]
   });
 }

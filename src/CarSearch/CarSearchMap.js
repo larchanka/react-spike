@@ -1,12 +1,11 @@
 /* global google */
 
-import MarkerClusterer from 'marker-clusterer-plus';
-import InfoBox from 'google-maps-infobox';
 import _ from 'lodash';
 import React, { PropTypes, Component } from 'react';
 import { connect } from '../util/react-redux-custom-store-key';
 import { changeMapBounds, changeSelectedLocation } from './actions';
-import * as MapMarkers from './MapMarkers';
+import { createMarker, createMarkerClusterer } from './MapMarkers';
+import { createInfoBox } from './CarSearchInfoBox';
 import './styles/CarSearchMap.css';
 
 // Map docs: https://developers.google.com/maps/documentation/javascript/tutorial
@@ -67,7 +66,7 @@ class CarSearchMap extends Component {
 
     for (const city of citiesAndLocations) {
       for (const location of city.locations) {
-        const marker = MapMarkers.createMarker(location, this.map);
+        const marker = createMarker(location, this.map);
         marker.addListener('click', () => {
           this.context.carSearchStore.dispatch(changeSelectedLocation(location));
 
@@ -81,22 +80,7 @@ class CarSearchMap extends Component {
       }
     }
 
-    // eslint-disable-next-line
-    new MarkerClusterer(this.map, markers, {
-      gridSize: 35,
-      minimumClusterSize: 4,
-      styles: [
-        {
-          url: MapMarkers.spriteUrl,
-          height: 28,
-          width: 28,
-          anchorText: [1, 0],
-          textColor: '#fff',
-          textSize: 10,
-          backgroundPosition: '-360px -85px'
-        }
-      ]
-    });
+    createMarkerClusterer(markers, this.map);
   }
 
   drawInfoWindow(location) {
@@ -104,9 +88,8 @@ class CarSearchMap extends Component {
       this.infoBox.close();
     }
 
-    this.infoBox = new InfoBox({
-      content: location.addr
-    });
+    this.infoBox = createInfoBox(location);
+
     this.infoBox.open(this.map, location.marker);
   }
 
