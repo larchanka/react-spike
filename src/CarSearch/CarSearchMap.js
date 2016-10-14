@@ -60,11 +60,9 @@ class CarSearchMap extends Component {
   }
 
   drawMarkers(data) {
-    const citiesAndLocations = data.citiesAndLocations;
-
     const markers = [];
 
-    for (const city of citiesAndLocations) {
+    for (const city of data.citiesAndLocations) {
       for (const location of city.locations) {
         const marker = createMarker(location, this.map);
         marker.addListener('click', () => {

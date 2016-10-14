@@ -24,6 +24,7 @@ const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
         if (location === selectedLocation) {
           selectedLocationIndex = locations.length;
         }
+        location.city = city;
         locations.push(location);
       }
     }
@@ -41,7 +42,8 @@ const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
         style={style}
         onClick={() => carSearchStore.dispatch(changeSelectedLocation(location))}
       >
-        {location.addr}
+        <div className="addr">{location.addr}</div>
+        <div className="city">{location.city.name}</div>
       </div>
     );
   };
