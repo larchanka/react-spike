@@ -37,9 +37,7 @@ class CarSearchMap extends Component {
     if (this.props.data) {
       this.drawMarkers(this.props.data);
 
-      if (this.props.selectedLocation) {
-        this.drawInfoWindow(this.props.selectedLocation);
-      }
+      this.drawInfoWindow(this.props.selectedLocation);
     }
   }
 
@@ -81,7 +79,13 @@ class CarSearchMap extends Component {
       this.infoBox.close();
     }
 
+    if (!location) return;
+
     this.infoBox = createInfoBox(location);
+
+    this.infoBox.addListener('closeclick', () => {
+      this.context.carSearchStore.dispatch(changeSelectedLocation(null));
+    });
 
     this.infoBox.open(this.map, location.marker);
 

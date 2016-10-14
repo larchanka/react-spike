@@ -21,3 +21,11 @@
     height: 13px;
   }
 }
+
+// close button
+.infoBox > img {
+  z-index: 999;
+  position: absolute;
+  top: 4px;
+  right: 20px;
+}

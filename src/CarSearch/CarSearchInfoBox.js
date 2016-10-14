@@ -25,7 +25,6 @@ export function createInfoBox(location) {
     content,
     alignBottom: true,
     pixelOffset: new google.maps.Size(-85, 0),
-    closeBoxURL: '',
     enableEventPropagation: true,
     infoBoxClearance: new google.maps.Size(10, 10)
   });
