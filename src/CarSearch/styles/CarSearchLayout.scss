@@ -1,6 +1,7 @@
 .CarSearchLayout {
   white-space: nowrap;
-  * {
+  // set white-space to normal for direct children of any kind
+  & > * {
     white-space: normal;
   }
 }
