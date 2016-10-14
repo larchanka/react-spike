@@ -11,14 +11,15 @@ export function createInfoBox(location) {
   if (location.cars.length <= 1) {
     const car = location.cars[0];
     content += `<p class="car">${car.model} <span class="type ${car.type}"></span>`
-      + `<p class="addr">${location.addr}</p>`;
+      + `<p class="addr">${location.addr}</p>`
+      + '<a class="bookLink" href="/">Book</a>';
   } else {
     content += `${location.cars.length} cars`;
   }
 
-  content += '</div>' +
-    '<div class="iw-btm"></div>';
-  content += '</div>';
+  content += '</div>'
+    + '<div class="iw-btm"></div>'
+    + '</div>';
 
   return new InfoBox({
     content,
