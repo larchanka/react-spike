@@ -11,5 +11,14 @@
     &.selected, &:hover {
       background-color: #e5e5e5;
     }
+
+    .addr {
+      margin-bottom: 4px;
+    }
+
+    .city {
+      color: #666;
+      font-size: 12px;
+    }
   }
 }
