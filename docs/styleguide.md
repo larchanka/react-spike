@@ -1,4 +1,7 @@
+[Back to documentation's list](./)
+
 # Styleguide
+
 We use Airbnb styleguide for JS and CSS/SCSS:
 
 - [Javascript](styleguide-js.md)

@@ -1,3 +1,5 @@
+[Back to documentation's list](./)
+
 # JavaScript Style Guide() {
 
 *Based on [Airbnb JavaScript](https://github.com/airbnb/javascript) styleguide*
@@ -3045,3 +3047,5 @@
 **[⬆ back to top](#table-of-contents)**
 
 # };
+
+[Back to documentation's list](./)

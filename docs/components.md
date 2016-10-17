@@ -1,3 +1,5 @@
+[Back to documentation's list](./)
+
 # Components flow
 
 All the components **shouldn't be** connected to the stores. All the big components have to be splitted on the bunch of small stateless components. Data for them have to be passed through the properties.
@@ -29,3 +31,5 @@ If something is coming from `context`, create a wrapper component, which will pa
 ## Modules
 
 If some component is going to be a reusable module, add `package.json` to the component's root folder.
+
+[Back to documentation's list](./)

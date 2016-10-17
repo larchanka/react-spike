@@ -1,3 +1,5 @@
+[Back to documentation's list](./)
+
 # How to run the Project
 
 * Download repository or clone it with git.
@@ -304,3 +306,7 @@ Since Create React App doesn’t support server rendering, you might be wonderin
 Then, on the server, regardless of the backend you use, you can read `index.html` into memory and replace `%OG_TITLE%`, `%OG_DESCRIPTION%`, and any other placeholders with values depending on the current URL. Just make sure to sanitize and escape the interpolated values so that they are safe to embed into HTML!
 
 If you use a Node server, you can even share the route matching logic between the client and the server. However duplicating it also works fine in simple cases.
+
+---
+
+[Back to documentation's list](./)
