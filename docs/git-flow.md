@@ -60,3 +60,7 @@ Every pull request should include describtion (probably copied from the jira tas
 
 - [ ] Tested UX of affected UI changes
 ```
+
+---
+
+[Back to documentation's list](./)

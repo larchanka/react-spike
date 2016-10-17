@@ -32,4 +32,6 @@ If something is coming from `context`, create a wrapper component, which will pa
 
 If some component is going to be a reusable module, add `package.json` to the component's root folder.
 
+---
+
 [Back to documentation's list](./)
