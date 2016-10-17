@@ -3,6 +3,7 @@ import React from 'react';
 import Testimonials from '../components/Testimonials/Testimonials';
 import PreFooterLinks from '../components/PreFooterLinks/PreFooterLinks';
 import CarSearch from '../CarSearch/CarSearch';
+import SlideMenuWrapper from '../components/SlideMenu/SlideMenuWrapper';
 
 // import logo from './logo.svg';
 import './styles/App.css';
@@ -27,20 +28,23 @@ const testimonialsData = [
 
 const App = () => (
   <div className="App">
-    {/* <div className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h2>Welcome to React!</h2>
-    </div> */}
-    <h1>Car search</h1>
-    <CarSearch />
+    <div className="App-header">
+      <SlideMenuWrapper menuPosition="right" />
+    </div>
 
-    <hr />
-    <h1>Testimonials</h1>
-    <Testimonials data={testimonialsData} />
+    <div className="App-Content">
 
-    <hr />
-    <h1>Pre Footer Links</h1>
-    <PreFooterLinks />
+      <h1>Car search</h1>
+      <CarSearch />
+
+      <hr />
+      <h1>Testimonials</h1>
+      <Testimonials data={testimonialsData} />
+
+      <hr />
+      <h1>Pre Footer Links</h1>
+      <PreFooterLinks />
+    </div>
   </div>
 );
 

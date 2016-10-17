@@ -7,4 +7,6 @@ Execute `npm run selenium` to run tests.
 
 `Chai` and `Should/Expect` are supported. Docs can [be found here](http://chaijs.com/api/bdd/).
 
-Currently tests are runnign against Chrome Browser on the local machine. Later remote server or Saas can be added.
+Currently tests are runnign against Chrome Browser on the local machine. Remote server or Saas can be added later.
+
+Every test should describe the feature and should go through all possible user interactions with the component / feature.
