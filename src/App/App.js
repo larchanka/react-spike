@@ -4,6 +4,7 @@ import Testimonials from '../components/Testimonials/Testimonials';
 import PreFooterLinks from '../components/PreFooterLinks/PreFooterLinks';
 import CarSearch from '../CarSearch/CarSearch';
 import SlideMenuWrapper from '../components/SlideMenu/SlideMenuWrapper';
+import TripExamples from '../components/TripExamples/TripExamples';
 
 // import logo from './logo.svg';
 import './styles/App.css';
@@ -36,6 +37,10 @@ const App = () => (
 
       <h1>Car search</h1>
       <CarSearch />
+
+      <hr />
+      <h1>Trip Examples</h1>
+      <TripExamples />
 
       <hr />
       <h1>Testimonials</h1>
