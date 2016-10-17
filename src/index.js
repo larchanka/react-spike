@@ -7,7 +7,15 @@ import App from './App/App';
 
 import './styles/index.css';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+const init = (nodeId, props) => {
+  const node = document.getElementById(nodeId);
+
+  if (node) {
+    ReactDOM.render(
+      <App {...props} />,
+      node
+    );
+  }
+};
+
+init('root');
