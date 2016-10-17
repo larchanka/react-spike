@@ -1,1 +1,1 @@
-.CarList{display:inline-block;vertical-align:top;margin-left:5px}.CarList .CarListItemContainer{border-bottom:1px solid #ccc;cursor:pointer}.CarList .CarListItemContainer .CarListItem{padding:5px}
+.CarList{display:inline-block;vertical-align:top;margin-left:5px}.CarList .CarListItem{border-bottom:1px solid #ccc;cursor:pointer;padding:5px}.CarList .CarListItem.selected,.CarList .CarListItem:hover{background-color:#e5e5e5}.CarList .CarListItem .addr{margin-bottom:4px}.CarList .CarListItem .city,.CarList .CarListItem .distance{color:#666;font-size:12px}

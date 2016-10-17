@@ -3,12 +3,22 @@
   vertical-align: top;
   margin-left: 5px;
 
-  .CarListItemContainer {
+  .CarListItem {
     border-bottom: 1px solid #ccc;
     cursor: pointer;
+    padding: 5px;
 
-    .CarListItem {
-      padding: 5px;
+    &.selected, &:hover {
+      background-color: #e5e5e5;
+    }
+
+    .addr {
+      margin-bottom: 4px;
+    }
+
+    .city, .distance {
+      color: #666;
+      font-size: 12px;
     }
   }
 }

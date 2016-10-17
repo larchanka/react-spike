@@ -21,4 +21,3 @@ export function changeSelectedLocation(location) {
     location
   };
 }
-
