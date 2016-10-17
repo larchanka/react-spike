@@ -48,7 +48,7 @@ export function createMarkerClusterer(markers, map) {
   // eslint-disable-next-line
   return new MarkerClusterer(map, markers, {
     gridSize: 35,
-    minimumClusterSize: 4,
+    minimumClusterSize: 2,
     styles: [
       {
         url: spriteUrl,
