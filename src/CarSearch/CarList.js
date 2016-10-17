@@ -5,7 +5,7 @@ import { List } from 'react-virtualized';
 import classnames from 'classnames';
 import { connect } from './util/react-redux-custom-store-key';
 import { changeSelectedLocation } from './actions';
-import { getDistance } from './util/distance';
+import { getDistanceMeters, getDistanceString } from './util/distance';
 import './styles/CarList.css';
 
 const mapStateToProps = ({ serverData, mapBounds, selectedLocation, selectedPlace }) => ({
@@ -30,13 +30,15 @@ const CarList = ({ data, mapBounds, selectedLocation, selectedPlace }, { carSear
           selectedLocationIndex = locations.length;
         }
         location.city = city;
-        location.distance = selectedPlace
-          ? getDistance(selectedPlace.geometry.location, latLng) : null;
+        location.distanceMeters = selectedPlace
+          ? getDistanceMeters(selectedPlace.geometry.location, latLng) : null;
         locations.push(location);
       }
     }
   }
-  locations.sort((a, b) => (a.distance - b.distance));
+  if (selectedPlace) {
+    locations.sort((a, b) => (a.distanceMeters - b.distanceMeters));
+  }
 
   // eslint-disable-next-line
   const rowRenderer = ({ key, index, style }) => {
@@ -52,7 +54,8 @@ const CarList = ({ data, mapBounds, selectedLocation, selectedPlace }, { carSear
       >
         <div className="addr">{location.addr}</div>
         <div className="city">{location.city.name}</div>
-        <div className="distance">{location.distance}</div>
+        {selectedPlace
+          ? <div className="distance">{getDistanceString(location.distanceMeters)}</div> : null}
       </div>
     );
   };
