@@ -1,0 +1,129 @@
+@import '../../../globals/constants.scss';
+
+.SlideMenu {
+  position: fixed;
+  z-index: 100;
+  width: 320px;
+  top: 0;
+  bottom: 0;
+  background: #fff;
+  border-left: 1px solid $green;
+  transition: transform .3s ease-in;
+  box-sizing: border-box;
+
+  &-right {
+    right: 0;
+    transform: translate3d(320px, 0, 0);
+  }
+
+  &-left {
+    left: 0;
+    transform: translate3d(-320px, 0, 0);
+  }
+
+  &-Visible {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.SlideMenu-Shadow {
+  appearance: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 0;
+  background-color: rgba(0, 0, 0, 0);
+
+  &:after {
+    display: block;
+    content: '';
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: opacity .3s ease-in .1s;
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+
+  &-Visible {
+    height: auto;
+
+    &:after {
+      opacity: 1;
+    }
+  }
+}
+
+.SlideMenuButton {
+  position: relative;
+  z-index: 101;
+  appearance: none;
+  display: block;
+  border: 0;
+  background-color: rgba(255, 255, 255, 0);
+  cursor: pointer;
+}
+
+.SlideMenuButton-Text {
+  text-transform: uppercase;
+  color: $green;
+  font-weight: 700;
+  opacity: 1;
+  transition: opacity .1s;
+
+  &:active {
+    color: $green;
+  }
+
+  .SlideMenuButton-Visible & {
+    opacity: 0;
+  }
+}
+
+.SlideMenuButton-Icon-Stripe {
+  background: $green;
+  height: 4px;
+  margin-bottom: 4px;
+  width: 35px;
+  opacity: 1;
+  transition: all .2s;
+
+  &:first-child {
+    width: 28px;
+  }
+
+  &:last-child {
+    width: 32px;
+  }
+
+  .SlideMenuButton-Visible & {
+    background: $green;
+    border-radius: 2px;
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+
+    &:first-child,
+    &:last-child {
+      width: 35px;
+    }
+
+    &:first-child {
+      transform: rotateZ(45deg);
+      transform-origin: 0% 170%;
+    }
+
+    &:last-child {
+      transform: rotateZ(-45deg);
+      transform-origin: 40% 60%;
+    }
+  }
+}

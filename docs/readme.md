@@ -1,7 +1,9 @@
-# Project docs
+# Greenwheels Project Documentation
 
-* [Styleguide](./styleguide.md)
+* [How to run](./run.md)
+* [Style Guide](./styleguide.md)
 * [Git Flow](./git-flow.md)
+* [Components](./components.md)
 * [Unit tests](./unit-tests.md)
 * [End-to-end tests](./end-to-end-tests.md)
-* UI tests (???)
+* [UI tests](./ui-tests.md)

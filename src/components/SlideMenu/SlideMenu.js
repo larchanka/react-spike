@@ -1,24 +1,51 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes } from 'react';
+import classnames from 'classnames';
 
 import './styles/index.css';
 
-class PreFooterLinks extends Component {
+const onClickShadowHandler = (ev, cb) => {
+  const { target } = ev;
 
-  renderIcon() {
-    return null;
+  if (target.classList.contains('SlideMenu-Shadow')) {
+    cb();
   }
-
-  render() {
-    return (
-      <div>
-        {this.renderIcon()}
-      </div>
-    );
-  }
-}
-
-PreFooterLinks.propTypes = {
-  data: PropTypes.array
 };
 
-export default PreFooterLinks;
+const SlideMenu = props => (
+  <button
+    className={
+      classnames(
+        'SlideMenu-Shadow',
+        {
+          'SlideMenu-Shadow-Visible': props.visible
+        }
+      )
+    }
+    onClick={
+      ev => onClickShadowHandler(ev, props.onClickShadow)
+    }
+  >
+    <div
+      className={
+        classnames(
+          'SlideMenu',
+          `SlideMenu-${props.position}`,
+          {
+            'SlideMenu-Visible': props.visible
+          }
+        )
+      }
+    />
+  </button>
+);
+
+SlideMenu.propTypes = {
+  position: PropTypes.oneOf([
+    'left',
+    'right'
+  ]),
+  visible: PropTypes.bool,
+  onClickShadow: PropTypes.func
+};
+
+export default SlideMenu;
