@@ -2,7 +2,7 @@
 
 import _ from 'lodash';
 import React, { PropTypes, Component } from 'react';
-import { connect } from '../util/react-redux-custom-store-key';
+import { connect } from './util/react-redux-custom-store-key';
 import { changeMapBounds, changeSelectedLocation } from './actions';
 import { createMarker, createMarkerClusterer } from './MapMarkers';
 import { createInfoBox } from './CarSearchInfoBox';
@@ -12,13 +12,8 @@ import './styles/CarSearchMap.css';
 
 const searchZoom = 12;
 
-function getLatLng(place) {
-  if (!place || !place.geometry) return null;
-  return place.geometry.location;
-}
-
 const mapStateToProps = ({ selectedPlace, serverData, selectedLocation }) => ({
-  initialLatLng: getLatLng(selectedPlace),
+  initialLatLng: selectedPlace ? selectedPlace.geometry.location : null,
   data: serverData.data,
   selectedLocation
 });

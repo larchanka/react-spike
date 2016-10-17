@@ -1,17 +1,21 @@
+/* global google */
+
 import React, { PropTypes } from 'react';
 import { List } from 'react-virtualized';
 import classnames from 'classnames';
-import { connect } from '../util/react-redux-custom-store-key';
+import { connect } from './util/react-redux-custom-store-key';
 import { changeSelectedLocation } from './actions';
+import { getDistance } from './util/distance';
 import './styles/CarList.css';
 
-const mapStateToProps = ({ serverData, mapBounds, selectedLocation }) => ({
+const mapStateToProps = ({ serverData, mapBounds, selectedLocation, selectedPlace }) => ({
   data: serverData.data,
   mapBounds,
-  selectedLocation
+  selectedLocation,
+  selectedPlace
 });
 
-const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
+const CarList = ({ data, mapBounds, selectedLocation, selectedPlace }, { carSearchStore }) => {
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -20,15 +24,19 @@ const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
   let selectedLocationIndex;
   for (const city of data.citiesAndLocations) {
     for (const location of city.locations) {
-      if (mapBounds && mapBounds.contains({ lat: location.geo[0], lng: location.geo[1] })) {
+      const latLng = new google.maps.LatLng(location.geo[0], location.geo[1]);
+      if (mapBounds && mapBounds.contains(latLng)) {
         if (location === selectedLocation) {
           selectedLocationIndex = locations.length;
         }
         location.city = city;
+        location.distance = selectedPlace
+          ? getDistance(selectedPlace.geometry.location, latLng) : null;
         locations.push(location);
       }
     }
   }
+  locations.sort((a, b) => (a.distance - b.distance));
 
   // eslint-disable-next-line
   const rowRenderer = ({ key, index, style }) => {
@@ -44,6 +52,7 @@ const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
       >
         <div className="addr">{location.addr}</div>
         <div className="city">{location.city.name}</div>
+        <div className="distance">{location.distance}</div>
       </div>
     );
   };
@@ -65,7 +74,8 @@ const CarList = ({ data, mapBounds, selectedLocation }, { carSearchStore }) => {
 CarList.propTypes = {
   data: PropTypes.object,
   mapBounds: PropTypes.object,
-  selectedLocation: PropTypes.object
+  selectedLocation: PropTypes.object,
+  selectedPlace: PropTypes.object
 };
 
 CarList.contextTypes = {

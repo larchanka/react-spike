@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import Spinner from 'react-spinner';
-import { connect } from '../util/react-redux-custom-store-key';
+import { connect } from './util/react-redux-custom-store-key';
 import './styles/CarSearchLayout.css';
 import '../../node_modules/react-spinner/react-spinner.css';
 import CarSearchTopBar from './CarSearchTopBar';
