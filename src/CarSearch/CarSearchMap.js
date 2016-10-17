@@ -48,6 +48,11 @@ class CarSearchMap extends Component {
     }
 
     if (nextProps.selectedLocation !== this.props.selectedLocation) {
+      // selectedLocation prop changed, so close the old infoBox and set its marker back to visible
+      if (this.props.selectedLocation) {
+        this.infoBox.close();
+        this.props.selectedLocation.marker.setVisible(true);
+      }
       this.drawInfoWindow(nextProps.selectedLocation);
     }
   }
@@ -70,10 +75,6 @@ class CarSearchMap extends Component {
   }
 
   drawInfoWindow(location) {
-    if (this.infoBox) {
-      this.infoBox.close();
-    }
-
     if (!location) return;
 
     this.infoBox = createInfoBox(location);
@@ -82,6 +83,7 @@ class CarSearchMap extends Component {
       this.context.carSearchStore.dispatch(changeSelectedLocation(null));
     });
 
+    location.marker.setVisible(false);
     this.infoBox.open(this.map, location.marker);
 
     if (this.map.getZoom() < searchZoom) {
